@@ -200,21 +200,17 @@ isTodayMyBirthday();
   Scrivi una funzione chiamata "deleteProp" che riceve un oggetto e una stringa come parametri; deve ritornare l'oggetto fornito dopo aver eliminato
   in esso la proprietà chiamata come la stringa passata come secondo parametro.
   */
-// const io = {
-//   nome: "Flavio",
-//   età: "22",
-// };
-
-// const deleteProp = (obj, str) => {
-//   for (let i = 0; i < obj.length; i++) {
-//     for (let j = 0; i < str.length; i++)
-//       if (str[j] === obj[i]) {
-//         delete obj[i];
-//       }
-//     console.log("oggetto", obj);
-//   }
-// };
-// deleteProp(io, "nome");
+let io = {
+  nome: "Flavio",
+  età: "22",
+};
+const deleteProp = (obj, str) => {
+  if (obj.hasOwnProperty(str)) {
+    delete obj[str];
+  }
+  console.log(obj);
+};
+deleteProp(io, "età");
 
 const movies = [
   {
@@ -339,7 +335,7 @@ const newestMovie = () => {
     }
     if (item.Year > newMovie) {
       newMovie = item.Year;
-      // movies2[0] = item;
+
       movies2 = {
         Title: item.Title,
         Year: item.Year,
@@ -406,23 +402,25 @@ searchByTitle("lord of the flies");
   Scrivi una funzione chiamata "searchAndDivide" che riceve una stringa come parametro e ritorna un oggetto contenente due array: "match" e "unmatch".
   "match" deve includere tutti i film dell'array "movies" fornito che contengono la stringa fornita all'interno del proprio titolo, mentre "unmatch" deve includere tutti i rimanenti.
 */
-// const match = [];
-// const unmatch = [];
+const match = [];
+const unmatch = [];
 
-// const searchAndDivide = (str) => {
-//   for (let i = 0; i < movies.length; i++) {
-//     for (let j = 0; j < str.length; j++)
-//       if (movies.find(str[j])) {
-//         match.push(movies[i].Title);
-//         console.log("match", match);
-//       } else {
-//         unmatch.push(movies[i].Title);
-//         console.log(unmatch);
-//       }
-//   }
-// };
+const searchAndDivide = (str) => {
+  for (let i = 0; i < movies.length; i++) {
+    if (movies[i].Title.toLowerCase().indexOf(str.toLowerCase()) !== -1) {
+      match.push(movies[i]);
+    } else {
+      unmatch.push(movies[i]);
+    }
+  }
+  console.log("match", match);
+  console.log("unmatch", unmatch);
+  let myCollection = new Object();
+  myCollection = { match: match, unmatch: unmatch };
+  console.log(myCollection);
+};
+searchAndDivide("lord");
 
-// searchAndDivide("lord");
 /* ESERCIZIO 19
   Scrivi una funzione chiamata "removeIndex" che riceve un numero come parametro e ritorna l'array "movies" fornito privo dell'elemento nella posizione ricevuta come parametro.
 */
